@@ -15,7 +15,6 @@ export class AiController {
 
   @Post('chat')
   chat(@Body() body: { message: string }) {
-    console.log('chat', body.message);
     return this.kafkaClient.send('ai.chat', {
       message: body.message,
     });

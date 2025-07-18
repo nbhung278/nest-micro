@@ -24,9 +24,10 @@ export class LangchainService {
         input: createLangchainChatDto.message,
       });
 
-      const message = Object.values(response)
-        .map((code) => String.fromCharCode(code))
-        .join('');
+      const message =
+        typeof response === 'string'
+          ? response
+          : Buffer.from(Object.values(response)).toString('utf8');
 
       return customMessage(HttpStatus.OK, 'Success', message);
     } catch (error) {

@@ -25,11 +25,11 @@
  */
 
 export enum TEMPLATES {
-  BASIC_CHAT_TEMPLATE = `You are an expert software engineer, give concise response.
+  BASIC_CHAT_TEMPLATE = `You are an expert software engineer.
      User: {input}
      AI:`,
 
-  CONTEXT_AWARE_CHAT_TEMPLATE = `You are an expert software engineer, give concise response.
+  CONTEXT_AWARE_CHAT_TEMPLATE = `You are an expert software engineer.
     
      Current conversation:
      {chat_history}

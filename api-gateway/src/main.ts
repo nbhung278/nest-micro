@@ -2,10 +2,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors();
+  app.setGlobalPrefix('api');
+
+  // Connect Kafka
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.KAFKA,
     options: {
@@ -16,6 +21,15 @@ async function bootstrap() {
       consumer: {
         groupId: 'api-gateway-consumer',
       },
+    },
+  });
+
+  // Connect gRPC
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.GRPC,
+    options: {
+      package: 'ai',
+      protoPath: join(__dirname, 'proto/ai.proto'),
     },
   });
 

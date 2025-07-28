@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package user;
+
+// Service định nghĩa các method tương ứng với RESTful API
+service UserService {
+  // GET /users/{id}
+  rpc GetUser (GetUserRequest) returns (UserResponse);
+
+  // GET /users
+  rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
+
+  // POST /users
+  rpc CreateUser (CreateUserRequest) returns (UserResponse);
+
+  // PUT /users/{id}
+  rpc UpdateUser (UpdateUserRequest) returns (UserResponse);
+
+  // DELETE /users/{id}
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+}
+
+// Message cho từng method
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message ListUsersRequest {
+  int32 page = 1;
+  int32 pageSize = 2;
+}
+
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message UpdateUserRequest {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message DeleteUserRequest {
+  string id = 1;
+}
+
+// Chuẩn cấu trúc response
+
+message UserResponse {
+  User user = 1;
+  string message = 2;
+  int32 code = 3;
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 pageSize = 4;
+  string message = 5;
+  int32 code = 6;
+}
+
+message DeleteUserResponse {
+  bool success = 1;
+  string message = 2;
+  int32 code = 3;
+}
+
+// Định nghĩa entity User
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string createdAt = 4;
+  string updatedAt = 5;
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package ai;
+
+service AiService {
+  rpc Chat (AiRequest) returns (AiReply);
+}
+
+message AiRequest {
+  string message = 1;
+}
+
+message AiReply {
+  string data = 1;
+  string message = 2;
+  int32 statusCode = 3;
+} 

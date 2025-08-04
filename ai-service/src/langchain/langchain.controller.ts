@@ -2,6 +2,7 @@ import { Controller } from '@nestjs/common';
 import { LangchainService } from './langchain.service';
 import { GrpcMethod, MessagePattern, Payload } from '@nestjs/microservices';
 import { CreateLangchainChatDto } from './dto/create-langchain-chat.dto';
+import { ApiResponse } from '../utils/responses/customMessage';
 
 @Controller()
 export class LangchainController {
@@ -12,8 +13,8 @@ export class LangchainController {
     return await this.langchainService.chat(createLangchainChatDto);
   }
 
-  @GrpcMethod('AiService', 'GetReply')
-  getReply(data: { message: string }): { reply: string } {
-    return { reply: `AI reply: ${data.message}` };
+  @GrpcMethod('AiService', 'Chat')
+  async chat(data: { message: string }): Promise<ApiResponse<string>> {
+    return await this.langchainService.chat(data);
   }
 }

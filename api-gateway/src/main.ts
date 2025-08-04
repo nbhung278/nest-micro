@@ -29,7 +29,7 @@ async function bootstrap() {
     transport: Transport.GRPC,
     options: {
       package: 'ai',
-      protoPath: join(__dirname, 'proto/ai.proto'),
+      protoPath: join(__dirname, '../../proto/ai.proto'),
     },
   });
 

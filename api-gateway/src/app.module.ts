@@ -22,7 +22,7 @@ import { join } from 'path';
         transport: Transport.GRPC,
         options: {
           package: 'ai',
-          protoPath: join(__dirname, 'proto/ai.proto'),
+          protoPath: join(__dirname, '../../proto/ai.proto'),
           url: 'localhost:50051',
         },
       },
